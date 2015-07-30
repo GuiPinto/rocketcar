@@ -62,41 +62,30 @@ void setup(){
 int motorInit = 0;
 
 void loop(){
-	
-    
-	/*
-	I have all values i need: 
-	- arm with a value between 89 to 97 during 2s
-	- one direction:99 to 138 and the other 87 to 48
-	- brake but is too bad for the motor, i don´t use them in my project:0 and 254.
-	*/
-	
+
+   
 	if(ET.receiveData()) {
 		
 		// Arming Electronic Speed Controller
 		if (controller.armESC) {
-			throttle.write( escArmVal );
-			delay(2000);
+			//throttle.write( escArmVal );
+			//delay(2000);
 		}
 		
 		// Steering
-                //steering.write( map(controller.steering, 0, 255, 20 + trim, 175 - trim) );
-                int steeringVal = controller.steering;
-                // Invert steering because servo is mounted backwards
+        int steeringVal = controller.steering;
+        // Invert steering because servo is mounted backwards
 		steering.write(map(steeringVal, 0, 255, 255, 0));
-
-//-----Foward: 95-255
-//-----Reverse: 84-0
 
 		// Throttle
 		if (controller.breaking) {
-			throttle.write(88);
+			throttle.write(0);
 		} else if (controller.reverse > 5) {
-			throttle.write( map(controller.reverse, 5, 255, 15, 84) );
+			throttle.write( map(controller.reverse, 5, 255, 124, 0) );
 		} else if (controller.throttle > 5) {  
-			throttle.write( map(controller.throttle, 5, 255, 125, 255) );
+			throttle.write( map(controller.throttle, 5, 255, 130, 255) );
 		} else {
-			throttle.write(92);
+			throttle.write(127);
 		}	
 
 		// Rocket Engine

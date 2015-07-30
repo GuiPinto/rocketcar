@@ -8,6 +8,8 @@
 #define TRIM_DEFAULT	0
 #define TRIM_AMOUNT     5
 
+#define THROTTLE_IDLE     127
+
 #define LIGHT_MODE_IDLE        0
 #define LIGHT_MODE_FIRE        1
 #define LIGHT_MODE_TRIM_LEFT   2
@@ -133,7 +135,6 @@ void loop() {
             rocketcontrols.engine1 = false;
         }
 		
-
 /*
 	Serial.print("throttle=");
 	Serial.print(rocketcontrols.throttle);
@@ -148,10 +149,11 @@ void loop() {
 	Serial.print(", engine1=");
 	Serial.print(rocketcontrols.engine1);
 	Serial.println("");
-*/
+    */
+    
 	ET.sendData();
-	
-        processControllerLights();
+
+    processControllerLights();
 
 	delay(20);
 }
